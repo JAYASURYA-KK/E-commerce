@@ -90,6 +90,6 @@ In your contact.php file’s <script> section, update the code like this:
 javascript
 Copy
 Edit
-
+E-Commerce-main/contact.php file
 🔁 Replace the IDs with your actual EmailJS values.
 
