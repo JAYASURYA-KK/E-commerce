@@ -1,7 +1,13 @@
 # 🌐 E-commerce Web Application – Food, Shopping, Travel
 
 Welcome to the **E-commerce Web Application** built by **JAYASURYA-KK**!  
-This all-in-one platform offers users the ability to **order food**, **shop for products**, and **book travel services** — all from one unified system.
+This all-in-one platform allows users to:
+
+- 🍔 **Order food online**
+- 🛍️ **Shop for products**
+- ✈️ **Book travel services**
+
+All under one seamless, user-friendly system.
 
 ---
 
@@ -15,81 +21,97 @@ This all-in-one platform offers users the ability to **order food**, **shop for 
 ### 🛍️ Online Shopping
 - Search and view product listings
 - Add to cart and checkout
-- Admin panel to manage inventory
+- Admin panel to manage inventory and orders
 
 ### ✈️ Travel Booking
-- Book travel packages and destinations
-- View offers, details, and pricing
-- Contact support for bookings
+- Explore and book travel packages
+- View deals, pricing, and destinations
+- Submit booking and contact inquiries
 
 ---
 
 ## 🧰 Tech Stack
 
-| Layer       | Technology                  |
-|-------------|------------------------------|
-| Frontend    | HTML, CSS, JavaScript, Bootstrap |
-| Backend     | PHP                          |
-| Database    | MySQL                        |
-| Server      | Apache (via XAMPP/WAMP)      |
+| Layer     | Technology                      |
+|-----------|----------------------------------|
+| Frontend  | HTML, CSS, JavaScript, Bootstrap |
+| Backend   | PHP                              |
+| Database  | MySQL                            |
+| Server    | Apache (XAMPP/WAMP)              |
 
 ---
 
 ## 📬 Contact Form with EmailJS (Setup Guide)
-Your contact.php file uses EmailJS to send contact form messages directly to your email — without needing any backend.
 
-Here’s how to set it up:
+Your `contact.php` file uses **EmailJS** to send form submissions directly to your email **without needing a backend**.
 
 ### 🔧 1. Create an EmailJS Account
-Visit 👉 https://www.emailjs.com/
-
-Click Get Started for Free
-
-Sign up using your email or Google account
+- Visit 👉 [https://www.emailjs.com/](https://www.emailjs.com/)
+- Click **Get Started for Free**
+- Sign up using your email or Google
 
 ### 🛠️ 2. Add an Email Service
-Go to the Email Services tab
+- Go to the **Email Services** tab
+- Click **"Add New Service"**
+- Choose your email provider (Gmail, Outlook, etc.)
+- Authorize and copy your **Service ID**  
+  👉 Example: `service_xxxxxxx`
 
-Click "Add New Service"
-
-Choose your email provider (e.g., Gmail, Outlook)
-
-Authorize and connect your email
-
-Copy your Service ID
-👉 Example: sexxxxxxxx
-
-🧾 3. Create an Email Template
-Go to the Email Templates tab
-
-Click "Create New Template"
-
-Add the following fields (must match your form):
-
-sql
-Copy
-Edit
-user_name  
-user_email  
-user_phone  
-user_subject  
-message  
+### 🧾 3. Create an Email Template
+- Go to the **Email Templates** tab
+- Click **"Create New Template"**
+- Add the following fields (must match your form):
+user_name
+user_email
+user_phone
+user_subject
+message
 current_date
-Save and copy the Template ID
-👉 Example: templxxxxxx
+- Save and copy your **Template ID**  
+👉 Example: `template_xxxxxxx`
 
 ### 🔑 4. Get Your Public Key
-Go to the Account tab → API Keys
+- Go to **Account > API Keys**
+- Copy your **Public Key**  
+👉 Example: `QLxxxxxxxxxxxxxxxx`
 
-Copy your Public Key
-👉 Example: QLxxxxxxxx
+### 💡 5. Update IDs in `contact.php`
 
-### 💡 5. Update These IDs in Your Code
-In your contact.php file’s <script> section, update the code like this:
+Inside the `<script>` section of your form:
 
-javascript
+```js
+emailjs.init('YOUR_PUBLIC_KEY'); // Example: QLxxxxxxxxxxxxxxxx
+
+emailjs.send('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', templateParams);
+🔁 Replace the placeholders with your actual values from EmailJS.
+
+🔐 Admin Panel Credentials
+Use the following credentials to log in to the admin panels:
+
+🛠️ Module	👤 Username	🔑 Password
+🌐 Main Admin	admin	admin
+🛍️ Shopping Admin	surya@gmail.com	surya@2007
+🍔 Food Admin	surya	surya@2007
+✈️ Travel Admin	surya	surya@2007
+📂 Project Setup (Local)
+Clone the Repository
+
+bash
 Copy
 Edit
-E-Commerce-main/contact.php file
-🔁 Replace the IDs with your actual EmailJS values.
+git clone https://github.com/JAYASURYA-KK/E-commerce.git
+Move Project to Server Directory
 
+XAMPP: C:/xampp/htdocs/E-commerce
+
+WAMP: C:/wamp/www/E-commerce
+
+Start Apache and MySQL via XAMPP/WAMP
+
+Import the MySQL Database
+
+Visit: http://localhost/phpmyadmin
+
+Create a new database (e.g., ecommerce)
+
+Import the .sql file (if available)
