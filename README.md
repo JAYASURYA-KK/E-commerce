@@ -83,6 +83,7 @@ Inside the `<script>` section of your form:
 emailjs.init('YOUR_PUBLIC_KEY'); // Example: QLxxxxxxxxxxxxxxxx
 
 emailjs.send('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', templateParams);
+```
 🔁 Replace the placeholders with your actual values from EmailJS.
 
 🔐 Admin Panel Credentials
