@@ -702,7 +702,7 @@
     <script>
     // Initialize EmailJS with your public key
     (function() {
-        emailjs.init('QLqxa8cv_ZzDIFjj0');
+        emailjs.init('Qxxxxxxx');
         console.log('✅ EmailJS initialized successfully');
     })();
 
@@ -714,9 +714,7 @@
         const inputs = form.querySelectorAll('input, textarea, select');
 
         console.log('🔧 EmailJS Configuration:');
-        console.log('📧 Service ID: service_okz1ucp');
-        console.log('📄 Template ID: template_wztq5tq');
-        console.log('🔑 Public Key: QLqxa8cv_ZzDIFjj0');
+       
 
         // Add real-time validation
         inputs.forEach(input => {
@@ -823,7 +821,7 @@
             console.log('📝 Template parameters prepared:', templateParams);
 
             // Send email using EmailJS with correct template ID
-            emailjs.send('service_okz1ucp', 'template_wztq5tq', templateParams)
+            emailjs.send('sexxxxxx', 'templxxxxxx', templateParams)
                 .then(function(response) {
                     console.log('✅ SUCCESS!', response.status, response.text);
                     showMessage('✅ Message sent successfully! We\'ll get back to you soon.',
