@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Dashboard</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 100vh;
+        padding: 20px;
+      }
+
+      .admin-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+        border-radius: 20px;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+      }
+
+      .header {
+        background: linear-gradient(135deg, #2c3e50, #34495e);
+        color: white;
+        padding: 30px 40px;
+        text-align: center;
+      }
+
+      .header h1 {
+        font-size: 2.5rem;
+        font-weight: 700;
+        margin-bottom: 10px;
+      }
+
+      .header p {
+        font-size: 1.1rem;
+        opacity: 0.9;
+      }
+
+      .revenue-container {
+        padding: 30px 40px;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      }
+
+      .revenue-full-width {
+        background: linear-gradient(135deg, #00b894 0%, #00cec9 100%);
+        border-radius: 20px;
+        padding: 40px;
+        text-align: center;
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+        position: relative;
+        overflow: hidden;
+        text-decoration: none;
+        display: block;
+        transition: all 0.3s ease;
+      }
+
+      .revenue-full-width::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          rgba(255, 255, 255, 0.3),
+          transparent
+        );
+        transition: left 0.5s ease;
+      }
+
+      .revenue-full-width:hover::before {
+        left: 100%;
+      }
+
+      .revenue-full-width:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
+      }
+
+      .revenue-full-width .nav-icon {
+        font-size: 4rem;
+        margin-bottom: 20px;
+        display: block;
+        transition: transform 0.3s ease;
+      }
+
+      .revenue-full-width:hover .nav-icon {
+        transform: scale(1.15) rotate(10deg);
+      }
+
+      .revenue-full-width .nav-title {
+        font-size: 2rem;
+        font-weight: 700;
+        color: white;
+        margin-bottom: 15px;
+      }
+
+      .revenue-full-width .nav-description {
+        color: rgba(255, 255, 255, 0.9);
+        font-size: 1.1rem;
+        line-height: 1.5;
+        max-width: 600px;
+        margin: 0 auto;
+      }
+
+      .nav-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 30px;
+        padding: 30px 40px 50px 40px;
+      }
+
+      .nav-item {
+        display: block;
+        text-decoration: none;
+        background: white;
+        border-radius: 15px;
+        padding: 40px 30px;
+        text-align: center;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease;
+        border: 2px solid transparent;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .nav-item::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          rgba(255, 255, 255, 0.4),
+          transparent
+        );
+        transition: left 0.5s ease;
+      }
+
+      .nav-item:hover::before {
+        left: 100%;
+      }
+
+      .nav-item:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        border-color: #667eea;
+      }
+
+      .nav-icon {
+        font-size: 3.5rem;
+        margin-bottom: 20px;
+        display: block;
+        transition: transform 0.3s ease;
+      }
+
+      .nav-item:hover .nav-icon {
+        transform: scale(1.1) rotate(5deg);
+      }
+
+      .nav-title {
+        font-size: 1.5rem;
+        font-weight: 600;
+        color: #2c3e50;
+        margin-bottom: 10px;
+      }
+
+      .nav-description {
+        color: #7f8c8d;
+        font-size: 0.95rem;
+        line-height: 1.4;
+      }
+
+      /* Individual color themes for each section */
+      .body-section {
+        background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
+      }
+
+      .food-section {
+        background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+      }
+
+      .shopping-section {
+        background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+      }
+
+      .travel-section {
+        background: linear-gradient(135deg, #74b9ff 0%, #0984e3 100%);
+      }
+
+      .revenue-section {
+        background: linear-gradient(135deg, #00b894 0%, #00cec9 100%);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .revenue-section::after {
+        content: "";
+        position: absolute;
+        top: -50%;
+        right: -50%;
+        width: 100%;
+        height: 100%;
+        background: radial-gradient(
+          circle,
+          rgba(255, 255, 255, 0.1) 0%,
+          transparent 70%
+        );
+        animation: shimmer 3s ease-in-out infinite;
+      }
+
+      @keyframes shimmer {
+        0%,
+        100% {
+          opacity: 0.3;
+          transform: rotate(0deg);
+        }
+        50% {
+          opacity: 0.8;
+          transform: rotate(180deg);
+        }
+      }
+
+      .body-section .nav-title,
+      .food-section .nav-title,
+      .shopping-section .nav-title,
+      .travel-section .nav-title,
+      .revenue-section .nav-title {
+        color: white;
+      }
+
+      .body-section .nav-description,
+      .food-section .nav-description,
+      .shopping-section .nav-description,
+      .travel-section .nav-description,
+      .revenue-section .nav-description {
+        color: rgba(255, 255, 255, 0.9);
+      }
+
+      @media (max-width: 768px) {
+        .nav-grid {
+          grid-template-columns: 1fr;
+          padding: 30px 20px;
+          gap: 20px;
+        }
+
+        .header {
+          padding: 20px;
+        }
+
+        .header h1 {
+          font-size: 2rem;
+        }
+
+        .nav-item {
+          padding: 30px 20px;
+        }
+
+        .nav-icon {
+          font-size: 3rem;
+        }
+      }
+
+      /* Responsive adjustments */
+      @media (max-width: 480px) {
+        body {
+          padding: 10px;
+        }
+
+        .admin-container {
+          border-radius: 15px;
+        }
+
+        .header h1 {
+          font-size: 1.8rem;
+        }
+
+        .nav-icon {
+          font-size: 2.5rem;
+        }
+
+        .nav-title {
+          font-size: 1.3rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="admin-container">
+      <div class="header">
+        <h1>Admin Dashboard</h1>
+        <p>Manage your application modules</p>
+      </div>
+
+      <div class="revenue-container">
+        <a href="revenue-dashboard.php" class="revenue-full-width">
+          <span class="nav-icon">📊</span>
+          <h3 class="nav-title">Revenue Dashboard</h3>
+          <p class="nav-description">
+            Track earnings, analytics, and financial reports across all business
+            modules
+          </p>
+        </a>
+      </div>
+
+      <div class="nav-grid">
+        <a
+          href="Online-Food-Ordering-System-in-PHP-main/admin/index.php"
+          class="nav-item food-section"
+        >
+          <span class="nav-icon">🍽️</span>
+          <h3 class="nav-title">Food & Nutrition</h3>
+          <p class="nav-description">
+            Control recipes, meal plans, and nutritional information
+          </p>
+        </a>
+
+        <a href="E-Commerce-main/login.php" class="nav-item shopping-section">
+          <span class="nav-icon">🛍️</span>
+          <h3 class="nav-title">Shopping</h3>
+          <p class="nav-description">
+            Manage products, orders, and e-commerce settings
+          </p>
+        </a>
+
+        <a
+          href="Tourism-Management-System-main/travel/Management/adminlogin.php"
+          class="nav-item travel-section"
+        >
+          <span class="nav-icon">✈️</span>
+          <h3 class="nav-title">Travel & Tours</h3>
+          <p class="nav-description">
+            Administer destinations, bookings, and travel packages
+          </p>
+        </a>
+      </div>
+    </div>
+
+    <script>
+      // Add some interactive functionality
+      document.querySelectorAll(".nav-item").forEach((item) => {
+        item.addEventListener("click", function (e) {
+          // Add a subtle animation effect when clicked
+          this.style.transform = "scale(0.95)";
+          setTimeout(() => {
+            this.style.transform = "";
+          }, 150);
+        });
+      });
+
+      // Add hover sound effect (optional)
+      document.querySelectorAll(".nav-item").forEach((item) => {
+        item.addEventListener("mouseenter", function () {
+          // You could add audio feedback here if desired
+        });
+      });
+    </script>
+    <script>
+      (function () {
+        if (!window.chatbase || window.chatbase("getState") !== "initialized") {
+          window.chatbase = (...arguments) => {
+            if (!window.chatbase.q) {
+              window.chatbase.q = [];
+            }
+            window.chatbase.q.push(arguments);
+          };
+          window.chatbase = new Proxy(window.chatbase, {
+            get(target, prop) {
+              if (prop === "q") {
+                return target.q;
+              }
+              return (...args) => target(prop, ...args);
+            },
+          });
+        }
+        const onLoad = function () {
+          const script = document.createElement("script");
+          script.src = "https://www.chatbase.co/embed.min.js";
+          script.id = "s6OI0Na4jrOMIUgze0iZ7";
+          script.domain = "www.chatbase.co";
+          document.body.appendChild(script);
+        };
+        if (document.readyState === "complete") {
+          onLoad();
+        } else {
+          window.addEventListener("load", onLoad);
+        }
+      })();
+    </script>
+  </body>
+</html>

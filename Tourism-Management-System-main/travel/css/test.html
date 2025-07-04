@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Fullscreen Test Launcher</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+        background: #f0f0f0;
+      }
+      button {
+        padding: 15px 30px;
+        font-size: 18px;
+        border: none;
+        background-color: #007bff;
+        color: white;
+        border-radius: 8px;
+        cursor: pointer;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+        transition: background-color 0.3s ease;
+      }
+      button:hover {
+        background-color: #0056b3;
+      }
+    </style>
+  </head>
+  <body>
+    <button onclick="openFullscreenTest()">Start Fullscreen Test</button>
+
+    <script>
+      function openFullscreenTest() {
+        const testUrl = "https://kongu.codetantra.com/secure/home.jsp"; // Replace this with your test URL
+
+        // Get user's screen size
+        const screenWidth = window.screen.availWidth;
+        const screenHeight = window.screen.availHeight;
+
+        // Features for popup window - positioned top-left, maximized size, no toolbar
+        const features = [
+          `width=${screenWidth}`,
+          `height=${screenHeight}`,
+          `left=0`,
+          `top=0`,
+          "toolbar=no",
+          "location=no",
+          "menubar=no",
+          "scrollbars=yes",
+          "resizable=yes",
+          "status=no",
+        ].join(",");
+
+        const newWindow = window.open(
+          testUrl,
+          "FullscreenTestWindow",
+          features
+        );
+
+        if (
+          !newWindow ||
+          newWindow.closed ||
+          typeof newWindow.closed === "undefined"
+        ) {
+          alert("Popup blocked! Please allow popups for this site.");
+        } else {
+          newWindow.focus();
+        }
+      }
+    </script>
+  </body>
+</html>

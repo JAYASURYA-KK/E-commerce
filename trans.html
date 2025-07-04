@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Google Translate Widget Demo</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+
+        background-color: #000000;
+      }
+
+      /* Header styling */
+      .header {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 20px;
+        text-align: center;
+        position: relative;
+        z-index: 1001;
+      }
+
+      .header h1 {
+        margin: 0;
+        font-size: 2.5em;
+      }
+
+      /* Translate toggle button - small icon style */
+      .translate-toggle {
+        background-color: #ff6a00;
+        color: white;
+        font-size: 18px;
+        width: 36px;
+        height: 36px;
+        line-height: 36px;
+        text-align: center;
+        border-radius: 50%;
+        cursor: pointer;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        user-select: none;
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        z-index: 1000;
+        transition: all 0.3s ease;
+      }
+
+      .translate-toggle:hover {
+        background-color: #e55a00;
+        transform: scale(1.1);
+      }
+
+      /* Translate widget container */
+      .translate-box {
+        position: fixed;
+        top: 65px;
+        right: 20px;
+        background: #fff;
+        padding: 8px 12px;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        z-index: 999;
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(-10px);
+        transition: all 0.3s ease;
+      }
+
+      .translate-box.show {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+      }
+
+      /* Style the Google Translate dropdown */
+      .goog-te-combo {
+        font-size: 14px;
+        padding: 4px 8px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        background: white;
+      }
+
+      /* Force Google Translate branding bar to appear after header */
+      .goog-te-banner-frame {
+        position: fixed !important;
+        top: 100px !important; /* Position after header */
+        left: 0 !important;
+        width: 100% !important;
+        z-index: 1000 !important;
+        background: #f8f9fa !important;
+        border-bottom: 1px solid #ddd !important;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important;
+      }
+
+      .goog-te-banner-frame.skiptranslate {
+        display: block !important;
+      }
+
+      /* Adjust content when translate bar is active */
+      body.translated {
+        padding-top: 40px !important;
+      }
+
+      /* Ensure body positioning */
+      body {
+        top: 0 !important;
+        position: static !important;
+      }
+
+      .goog-te-menu-frame {
+        max-height: 400px;
+        z-index: 1002 !important;
+      }
+
+      /* Add padding to content when translation is active */
+      .content {
+        margin-top: 40px;
+        transition: margin-top 0.3s ease;
+      }
+
+      /* When translation is active, add more space */
+      body[style*="top"] .content {
+        margin-top: 80px;
+      }
+
+      /* Content area */
+      .content {
+        max-width: 800px;
+        margin: 40px auto;
+        padding: 20px;
+        background: white;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+
+      .content h2 {
+        color: #333;
+        border-bottom: 2px solid #667eea;
+        padding-bottom: 10px;
+      }
+
+      .content p {
+        line-height: 1.6;
+        color: #666;
+        margin-bottom: 15px;
+      }
+
+      /* Responsive design */
+      @media (max-width: 768px) {
+        .translate-toggle {
+          top: 15px;
+          right: 15px;
+        }
+
+        .translate-box {
+          top: 60px;
+          right: 15px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Header Section -->
+    <div class="header">
+      <h1>Your Website Header</h1>
+      <p>Welcome to our multilingual website</p>
+    </div>
+
+    <!-- Google Translate Icon Button -->
+    <div class="translate-toggle" title="Translate this page">🌐</div>
+
+    <!-- Google Translate Widget (initially hidden with opacity) -->
+    <div id="google_translate_element" class="translate-box"></div>
+
+    <!-- Main Content -->
+    <div class="content">
+      <h2>Sample Content</h2>
+      <p>
+        This is sample content that can be translated into different languages
+        using the Google Translate widget. Click the globe icon in the top-right
+        corner to access the translation options.
+      </p>
+
+      <p>
+        The translate widget is positioned as a small, unobtrusive icon that
+        doesn't interfere with your header design. When clicked, it reveals the
+        language selection dropdown.
+      </p>
+
+      <h2>Features</h2>
+      <p>✅ Clean, minimalist design</p>
+      <p>✅ Fixed position that doesn't interfere with content</p>
+      <p>✅ Hover effects for better user experience</p>
+      <p>✅ Mobile responsive</p>
+      <p>✅ Hidden Google branding bar</p>
+      <p>✅ Toggle functionality - click to show/hide</p>
+
+      <h2>How it Works</h2>
+      <p>
+        The translation widget uses Google Translate's free service to provide
+        instant translation of your webpage content. Users can select from
+        dozens of languages, and the entire page content will be translated in
+        real-time.
+      </p>
+
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod
+        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
+        veniam, quis nostrud exercitation ullamco laboris.
+      </p>
+    </div>
+
+    <script>
+      // Toggle translate box on icon click
+      document.addEventListener("DOMContentLoaded", function () {
+        const toggle = document.querySelector(".translate-toggle");
+        const box = document.querySelector(".translate-box");
+
+        toggle.addEventListener("click", function (e) {
+          e.preventDefault();
+          box.classList.toggle("show");
+        });
+
+        // Close translate box when clicking outside
+        document.addEventListener("click", function (e) {
+          if (!toggle.contains(e.target) && !box.contains(e.target)) {
+            box.classList.remove("show");
+          }
+        });
+      });
+
+      // Google Translate initialization with custom positioning
+      function googleTranslateElementInit() {
+        new google.translate.TranslateElement(
+          {
+            pageLanguage: "en",
+            layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+            autoDisplay: false,
+          },
+          "google_translate_element"
+        );
+
+        // Monitor for translate bar and reposition it
+        setTimeout(function () {
+          const observer = new MutationObserver(function (mutations) {
+            const translateBar = document.querySelector(
+              ".goog-te-banner-frame"
+            );
+            if (translateBar) {
+              // Force position after header
+              translateBar.style.position = "fixed";
+              translateBar.style.top = "100px";
+              translateBar.style.left = "0";
+              translateBar.style.width = "100%";
+              translateBar.style.zIndex = "1000";
+              translateBar.style.background = "#f8f9fa";
+              translateBar.style.borderBottom = "1px solid #ddd";
+              translateBar.style.boxShadow = "0 2px 4px rgba(0,0,0,0.1)";
+            }
+          });
+
+          observer.observe(document.body, {
+            childList: true,
+            subtree: true,
+          });
+        }, 1000);
+      }
+    </script>
+
+    <!-- Google Translate Script -->
+    <script
+      type="text/javascript"
+      src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"
+    ></script>
+    <script src="smokey-cursor.js"></script>
+  </body>
+</html>
